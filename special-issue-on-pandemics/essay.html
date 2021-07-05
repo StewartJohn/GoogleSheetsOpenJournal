@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Essays</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		
+		<!-- In the production site, this is where we have Google Analytics -->
+		
+	</head>
+	<body class="is-preload" onload="fetchEssay()"> <!--  This calls the key function from essay.js in the js directory-->
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+                        <div class="inner" id="target">Loading....</div> 
+                        <script id="template" type="x-tmpl-mustache">  <!--  Some IDEs may color the following section like it is commented out, but it's not. We use mustache.js to populate the page with the data from a Google Sheets file. Everywhere that you see double curly brackets, we're calling in variables. There are several nested if statements within the  mustache syntax. Each article can go through 3 review cycles, so the if statements check to see what round of  review we're on and pull the relevant information. -->
+
+							<!-- Header -->
+								<header id="header">
+									<a href="./" class="logo"><strong>Pandemics</strong> Essays</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+				                    <h1 id="title"></h1>
+                                        <h2>{{author}}, "{{title}}" IsisCB Special Issue, ed. by Stephen P. Weldon and Neeraja Sankaran. 2021.</h2>
+                                        <p><b>Status:</b> {{status}}</p>
+									</header>
+                                    
+                                    <hr class="major" />
+
+									<!-- Content -->
+										<div class="row">
+											<div class="col-4 col-12-medium">
+                                                <span class="image fit"><img src="https://drive.google.com/uc?id={{featured_image}}" alt="" /></span>
+											</div>
+                                            <div class="col-8 col-12-medium" id="target">
+                                                <p class="essay_block"><b>Author(s):</b> <a href="{{author_url}}">{{author}}</a> ({{location}})<br/>
+                                                {{#author2}}<a href="{{author_url2}}">{{author2}}</a> ({{location2}})<br/>{{/author2}}
+                                                {{#author3}}<a href="{{author_url3}}">{{author3}}</a> ({{location3}})<br/>{{/author3}}
+                                                {{#essay_url_v3}} <!--conditional testing whether or not a version 3 of the essay exists -->
+                                                <b>Read the <a href="{{essay_url_v3}}">Essay, version 3</a>,</b> submitted on: {{essay_submission_v3}}.<br/>
+                                                <b>Read the <a href="{{bibliography_url_v3}}">Bibliography, version 3</a>,</b> submitted on: {{bibliography_submission_v3}}.<br/>
+                                                {{#rsp_url_v3}}<b>Read the <a href="{{rsp_url_v3}}">Author response</a>,</b> submitted on: {{rsp_submission_v3}}.<br/>{{/rsp_url_v3}}
+                                                    {{#eds_status_v3}}<b>Editors' Report:</b></p>
+                                                    <ul class="review">
+                                                    <li>Weldon, Stephen; Sankaran, Neeraja -- Submitted on {{eds_submission_v3}}. Evaluation: {{eds_status_v3}}.
+                                                        <ul class="review"><li>Read the <a href="{{eds_url_v3}}">Editors' Report for version 3</a>.</li></ul></li>
+                                                    </ul>{{/eds_status_v3}}
+                                                    {{#r1_author_v3}}<p class="essay_block"><b>Peer reviews:</b></p>
+                                                    <ul class="review">
+                                                    <li><a href="{{r1_author_url_v3}}">{{r1_author}}</a> ({{r1_location_v3}}){{#r1_url_v3}} -- Submitted on {{r1_submission_v3}}. Evaluation: {{r1_status_v3}}.
+                                                        <ul class="review"><li>Read the <a href="{{r1_url_v3}}">Referee Report for version 3</a>.</li></ul>{{/r1_url_v3}}{{^r1_url_v3}} -- Currently under review{{/r1_url_v3}}</li>
+                                                    {{#r2_author_v3}}<li><a href="{{r2_author_url_v3}}">{{r2_author_v3}}</a> ({{r2_location_v3}}){{#r2_url_v3}} -- Submitted on {{r2_submission_v3}}. Evaluation: {{r2_status_v3}}.
+                                                        <ul  class="review"><li>Read the <a href="{{r2_url_v3}}">Referee Report for version 3</a>.</li></ul>{{/r2_url_v3}}{{^r2_url_v3}} -- Currently under review{{/r2_url_v3}}</li>{{/r2_author_v3}}
+                                                    {{#r3_author_v3}}<li><a href="{{r3_author_url_v3}}">{{r3_author}}</a> ({{r3_location_v3}}){{#r3_url_v3}} -- Submitted on {{r3_submission_v3}}. Evaluation: {{r3_status_v3}}.
+                                                        <ul  class="review"><li>Read the <a href="{{r3_url_v3}}">Referee Report for version 3</a>.</li></ul>{{/r3_url_v3}}{{^r3_url_v3}} -- Currently under review{{/r3_url_v3}}</li>{{/r3_author_v3}}</ul>{{/r1_author_v3}}
+                                                    <hr>
+                                                {{/essay_url_v3}}
+                                                {{#essay_url_v2}} <!--conditional testing whether or not a version 2 of the essay exists-->
+                                                <b>Read the <a href="{{essay_url_v2}}">Essay, version 2</a>,</b> submitted on: {{essay_submission_v2}}.<br/>
+                                                <b>Read the <a href="{{bibliography_url_v2}}">Bibliography, version 2</a>,</b> submitted on: {{bibliography_submission_v2}}.<br/>
+                                                {{#rsp_url_v2}}<b>Read the <a href="{{rsp_url_v2}}">Author response</a>,</b> submitted on: {{rsp_submission_v2}}.<br/>{{/rsp_url_v2}}
+                                                    {{#eds_status_v2}}<b>Editors' Report:</b></p>
+                                                    <ul class="review">
+                                                    <li>Weldon, Stephen; Sankaran, Neeraja -- Submitted on {{eds_submission_v2}}. Evaluation: {{eds_status_v2}}.
+                                                        <ul class="review"><li>Read the <a href="{{eds_url_v2}}">Editors' Report for version 2</a>.</li></ul></li>
+                                                    </ul>{{/eds_status_v2}}
+                                                    {{#r1_author_v2}}<p class="essay_block"><b>Peer reviews:</b></p>
+                                                    <ul class="review">
+                                                    <li><a href="{{r1_author_url_v2}}">{{r1_author_v2}}</a> ({{r1_location_v2}}){{#r1_url_v2}} -- Submitted on {{r1_submission_v2}}. Evaluation: {{r1_status_v2}}.
+                                                        <ul class="review"><li>Read the <a href="{{r1_url_v2}}">Referee Report for version 2</a>.</li></ul>{{/r1_url_v2}}{{^r1_url_v2}} -- Currently under review{{/r1_url_v2}}</li>
+                                                    {{#r2_author_v2}}<li><a href="{{r2_author_url_v2}}">{{r2_author_v2}}</a> ({{r2_location_v2}}){{#r2_url_v2}} -- Submitted on {{r2_submission_v2}}. Evaluation: {{r2_status_v2}}.
+                                                        <ul  class="review"><li>Read the <a href="{{r2_url_v2}}">Referee Report for version 2</a>.</li></ul>{{/r2_url_v2}}{{^r2_url_v2}} -- Currently under review{{/r2_url_v2}}</li>{{/r2_author_v2}}
+                                                    {{#r3_author_v2}}<li><a href="{{r3_author_url_v2}}">{{r3_author_v2}}</a> ({{r3_location_v2}}){{#r3_url_v2}} -- Submitted on {{r3_submission_v2}}. Evaluation: {{r3_status_v2}}.
+                                                        <ul  class="review"><li>Read the <a href="{{r3_url_v2}}">Referee Report for version 2</a>.</li></ul>{{/r3_url_v2}}{{^r3_url_v2}} -- Currently under review{{/r3_url_v2}}</li>{{/r3_author_v2}}</ul>{{/r1_author_v2}}
+                                                    <hr>
+                                                {{/essay_url_v2}}
+                                                <!--Information for Version 1 is assumed to be omnipresent and thus not wrapped in conditionals-->
+                                                <b>Read the <a href="{{essay_url_v1}}">Essay, version 1</a>,</b> submitted on: {{essay_submission_v1}}.<br/>
+                                                <b>Read the <a href="{{bibliography_url_v1}}">Bibliography, version 1</a>,</b> submitted on: {{bibliography_submission_v1}}.<br/>
+                                                    {{#eds_status_v1}}<b>Editors' Report:</b>
+                                                    <ul class="review">
+                                                    <li>Weldon, Stephen; Sankaran, Neeraja -- Submitted on {{eds_submission_v1}}. Evaluation: {{eds_status_v1}}.
+                                                        <ul class="review"><li>Read the <a href="{{eds_url_v1}}">Editors' Report for version 1</a>.</li></ul></li>
+                                                    </ul>{{/eds_status_v1}}
+                                                    {{#r1_author_v1}}<p class="essay_block"><b>Peer reviews:</b></p>
+                                                    <ul class="review">
+                                                    <li><a href="{{r1_author_url_v1}}">{{r1_author_v1}}</a> ({{r1_location_v1}}){{#r1_url_v1}} -- Submitted on {{r1_submission_v1}}. Evaluation: {{r1_status_v1}}.
+                                                        <ul class="review"><li>Read the <a href="{{r1_url_v1}}">Referee Report for version 1</a>.</li></ul>{{/r1_url_v1}}{{^r1_url_v1}} -- Currently under review{{/r1_url_v1}}</li>
+                                                    {{#r2_author_v1}}<li><a href="{{r2_author_url_v1}}">{{r2_author_v1}}</a> ({{r2_location_v1}}){{#r2_url_v1}} -- Submitted on {{r2_submission_v1}}. Evaluation: {{r2_status_v1}}.
+                                                        <ul  class="review"><li>Read the <a href="{{r2_url_v1}}">Referee Report for version 1</a>.</li></ul>{{/r2_url_v1}}{{^r2_url_v1}} -- Currently under review{{/r2_url_v1}}</li>{{/r2_author_v1}}
+                                                    {{#r3_author_v1}}<li><a href="{{r3_author_url_v1}}">{{r3_author_v1}}</a> ({{r3_location_v1}}){{#r3_url_v1}} -- Submitted on {{r3_submission_v1}}. Evaluation: {{r3_status_v1}}.
+                                                        <ul  class="review"><li>Read the <a href="{{r3_url_v1}}">Referee Report for version 1</a>.</li></ul>{{/r3_url_v1}}{{^r3_url_v1}} -- Currently under review{{/r3_url_v1}}</li>{{/r3_author_v1}}</ul>{{/r1_author_v1}}
+                                                    <br/><p>See all commissioned essays <a href="index.html">here</a>.</p><br/>
+                                                </div>
+                                    </section>
+                                    {{#image_attribution}}<p style="font-size:8pt;">{{image_attribution}}</p>{{/image_attribution}}
+									<hr class="major" />                                
+                            </div></script></div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="./">List of authors and essays</a></li>
+										<li><a href="https://isiscb.org/about-special-issue-on-pandemics/">About the Special Issue</a></li>
+										<li><a href="https://isiscb.org/bibliographical-collections-on-pandemics-in-isiscb-explore/">Bibliographical Collections</a></li>
+										<li><a href="https://isiscb.org/keyword-pages-on-pandemics/">Keywords in Explore</a></li>
+										<li><a href="https://isiscb.org/pandemics-resources-around-the-web/">Resources</a></li>
+										<li><a href="https://isiscb.org/getting-started-with-pandemics/">Getting Started</a></li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>Pandemics Essays is a special issue of the History of Science Society's ISIS Bibliography. You can get in touch with the editor, Stephen Weldon, at the email address below.</p>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="mailto:isisbibliography@gmail.com">isisbibliography @ gmail . com</a></li>
+									</ul>
+								</section>
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; Pandemics Essays. All rights reserved. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+            <script src="assets/js/mustache.js"></script>
+            <script src="assets/js/essay.js"></script>     
+	</body>
+</html>

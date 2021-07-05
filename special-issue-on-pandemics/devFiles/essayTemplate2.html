@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Vivek</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+                        <div class="inner" id="target">Loading....</div>
+                        <script id="template" type="x-tmpl-mustache">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Pandemics</strong> Essays</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+				                    <h1 id="title"></h1>
+                                        <h2>Vivek Neelakantan, "History of Pandemics in Southeast Asia: A Return of National Anxieties? " IsisCB Special Issue, ed. by Stephen P. Weldon and Neeraja Sankanran 2020.</h2>
+									</header>
+                                    
+                                    <hr class="major" />
+
+									<!-- Content -->
+										<div class="row">
+											<div class="col-4 col-12-medium">
+                                                <span class="image fit"><img src="images/southEastAsia.png" alt="" /></span>
+											</div>
+                                            <div class="col-8 col-12-medium" id="target">
+                                                <p><b>Author:</b> {{author}} ({{location}})<br/>
+                                                <b>Read the Essay, version {{essay_version}}</b> Submitted on: 2020 Aug. 7<br/>
+                                                <b>Read the Bibliography, version 1</b> Submitted on: 2020 Aug. 7<br/>
+                                                <b>Status:</b> {{status}}<br/>
+                                                    <b>Peer reviews:</b></p>
+                                                    <ul>
+                                                    <li>{{r1_author}} ({{r1_location}}) -- Requested</li>
+                                                    <li>Tagliacozzo, Eric (Cornell University) -- Requested</li>
+                                                        <li>Nourse, Jennifer (University of Richmond) -- Submitted on 2020 Aug.  16. Evaluation: Revise.
+                                                        <ul><li>Read the Referee Report for Version 1.</li></ul></li></ul>
+                                                    <p>See all commissioned essays here.</p>
+                                                {{ title }}
+                                                
+                                                </div>
+                                    </section>
+
+									<hr class="major" />
+                            </div></script></div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+                            <!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Homepage</a></li>
+										<li><a href="generic.html">Generic</a></li>
+										<li><a href="elements.html">Elements</a></li>
+										<li>
+											<span class="opener">Essays</span>
+											<ul>
+												<li><a href="#">CBE101-Neelakantan</a></li>
+												<li id = "target2"><a href="#">Ipsum Adipiscing</a></li>
+												<li><a href="#">Tempus Magna</a></li>
+												<li><a href="#">Feugiat Veroeros</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>Pandemics Essays is a special issue of the History of Science Society's ISIS Bibliography. You can get in touch with the editor, Stephen Weldon, at the email address below.</p>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
+									</ul>
+								</section>
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+            <script src="https://unpkg.com/mustache@latest"></script>
+            <script>
+                $(function(){
+                    var url_string = window.location.href;
+                    var url = new URL(url_string);
+                    var postID = url.searchParams.get("essayID");
+                    console.log(postID);
+                    
+                    var template = document.getElementById('template').innerHTML;
+                    
+                    var sheetUrl = 'https://spreadsheets.google.com/feeds/list/1sSDTd148aQcaHDmPUKSKQpNuilUMScA_b78BU-3mwI0/3/public/values?alt=json';
+                    
+                    // Invoke the ajax request first
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', sheetUrl);
+                    xhr.onload = function () {       
+                        
+                    //filter the incoming json for the rows relevant to the article
+                    var entries = JSON.parse(xhr.responseText);
+                    entries = entries.feed.entry;
+                    console.log(entries);
+                    
+                    entries = entries.filter(function (entry) {
+                    return entry.gsx$article.$t == postID;
+                    });
+                        
+                    console.log(entries);
+            
+                    var data = {};
+                        
+                    for(entry of entries){
+                        switch(entry.gsx$typecode.$t){
+                            case "":
+                                data.author = entry.gsx$printname.$t;
+                                data.location = entry.gsx$location.$t;
+                                data.title = entry.gsx$title.$t;
+                                data.status = entry.gsx$evaluation.$t;
+                                break;
+                            case "a":
+                                data.essay_version = entry.gsx$version.$t;
+                                data.essay_submission = entry.gsx$submissiondate.$t;
+                                break;
+                            case "b":
+                                data.bibliography_version = entry.gsx$version.$t;
+                                data.bibliography_submission = entry.gsx$submissiondate.$t;
+                                break;
+                            case "r1":
+                                data.r1_author = entry.gsx$printname.$t;
+                                data.r1_location = entry.gsx$location.$t;
+                                data.r1_version = entry.gsx$version.$t;
+                                data.r1_submission = entry.gsx$submissiondate.$t;
+                                data.r1_status = entry.gsx$evaluation.$t;
+                                break;
+                            case "r2":
+                                data.r2_author = entry.gsx$printname.$t;
+                                data.r2_location = entry.gsx$location.$t;
+                                data.r2_version = entry.gsx$version.$t;
+                                data.r2_submission = entry.gsx$submissiondate.$t;
+                                data.r2_status = entry.gsx$evaluation.$t;
+                                break;
+                            case "r3":
+                                data.r3_author = entry.gsx$printname.$t;
+                                data.r3_location = entry.gsx$location.$t;
+                                data.r3_version = entry.gsx$version.$t;
+                                data.r3_submission = entry.gsx$submissiondate.$t;
+                                data.r3_status = entry.gsx$evaluation.$t;
+                                break;
+                            default:
+                                console.log("default entry");
+                                break;
+                        }
+                    }; 
+                        
+                    var rendered = Mustache.render(template, data);
+                    document.getElementById('target').innerHTML = rendered;
+                    document.getElementByID('target2').innerHTML = rendered;
+
+                    }
+                    xhr.send();         
+
+                });
+            </script>
+        
+	</body>
+</html>
